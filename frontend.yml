@@ -14,11 +14,13 @@
 
     - name: Removing Nginx default content
       ansible.builtin.file:
-        path: /usr/share/nginx/html/*
+        path: /usr/share/nginx/html
         state: absent
 
-    - name: Change Directory
-      ansible.builtin.shell: cd /usr/share/nginx/html
+    - name: Create Nginx content directory
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: directory
 
     - name: Download and extract frontend code
       ansible.builtin.unarchive:
