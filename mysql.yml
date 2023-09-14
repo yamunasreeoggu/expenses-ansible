@@ -2,13 +2,13 @@
   hosts: all
   become: yes
   tasks:
-    - name: Placing MySQL repo file
-      ansible.builtin.copy:
-        src: mysql.repo
-        dest: /etc/yum.repos.d/mysql.repo
-
-    - name: Disabling Mysql 8
-      ansible.builtin.shell: dnf module disable mysql -y
+#    - name: Placing MySQL repo file
+#      ansible.builtin.copy:
+#        src: mysql.repo
+#        dest: /etc/yum.repos.d/mysql.repo
+#
+#    - name: Disabling Mysql 8
+#      ansible.builtin.shell: dnf module disable mysql -y
 
     - name: Installing MySQL server
       ansible.builtin.dnf:
