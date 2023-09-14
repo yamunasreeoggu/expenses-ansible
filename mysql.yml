@@ -3,9 +3,7 @@
   become: yes
   tasks:
     - name: Disabling Mysql 8
-      ansible.builtin.dnf:
-        name: mysql
-        state: absent
+      ansible.builtin.shell: dnf module disable mysql -y
 
     - name: Placing MySQL repo file
       ansible.builtin.copy:
@@ -21,7 +19,6 @@
       ansible.builtin.systemd:
         name: mysqld
         state: restarted
-        enabled: yes
 
     - name: Setting root Password
       ansible.builtin.shell: mysql_secure_installation --set-root-pass ExpenseApp@1
