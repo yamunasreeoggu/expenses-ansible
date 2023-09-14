@@ -1,0 +1,27 @@
+- name: Mysql Setup
+  hosts: all
+  become: yes
+  tasks:
+    - name: Disabling Mysql 8
+      ansible.builtin.dnf:
+        name: mysql
+        state: absent
+
+    - name: Placing MySQL repo file
+      ansible.builtin.copy:
+        src: mysql.repo
+        dest: /etc/yum.repos.d/mysql.repo
+
+    - name: Installing MySQL server
+      ansible.builtin.dnf:
+        name: mysql
+        state: present
+
+    - name: Starting MySQL server
+      ansible.builtin.systemd:
+        name: mysql
+        state: restarted
+        enabled: yes
+
+    - name: Setting root Password
+      ansible.builtin.shell: mysql_secure_installation --set-root-pass ExpenseApp@1
