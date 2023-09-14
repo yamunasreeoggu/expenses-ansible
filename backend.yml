@@ -35,6 +35,11 @@
         dest: /app
         remote_src: yes
 
+    - name: Install Dependencies
+      ansible.builtin.shell: npm install
+      args:
+        chdir: /app
+
     - name: Restart Backend service
       ansible.builtin.systemd:
         name: backend
